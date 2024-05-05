@@ -1,9 +1,14 @@
 syntax = "proto3";
 
-option go_package = "catalogpb";
+option go_package = "./proto";
+
+package catalog_service;
 
 service CatalogService{
   rpc GetCatalog (GetCatalogRequest) returns (GetCatalogResponse){}
+  rpc CreateCatalog (CreateCatalogItemRequest) returns (CatalogItem){}
+  rpc UpdateCatalog (UpdateCatalogItemRequest) returns (CatalogItem){}
+  rpc DeleteCatalog (DeleteCatalogItemRequest) returns (CatalogItem){}
 }
 
 message GetCatalogRequest{
@@ -12,6 +17,15 @@ message GetCatalogRequest{
 
 message GetCatalogResponse{
   repeated CatalogItem catalog = 1;
+}
+
+message CreateCatalogItemRequest{
+  CatalogItem catalog_item = 1;
+}
+
+message UpdateCatalogItemRequest{
+  string catalog_id = 1;
+  CatalogItem updated_catalog = 2;
 }
 
 message CatalogItem{
@@ -26,4 +40,11 @@ message CatalogItem{
   string language_code = 9;
   string country_code = 10;
   int64 company_id = 11;
+}
+
+message DeleteCatalogItemRequest{
+  string catalog_id = 1;
+}
+message DeleteCatalogItemResponse{
+  bool success = 1;
 }
