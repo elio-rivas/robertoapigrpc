@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option go_package = "catalogpb";
+
+service CatalogService{
+  rpc GetCatalog (GetCatalogRequest) returns (GetCatalogResponse){}
+}
+
+message GetCatalogRequest{
+  string catalog_id = 1;
+}
+
+message GetCatalogResponse{
+  repeated CatalogItem catalog = 1;
+}
+
+message CatalogItem{
+  int64 id = 1;
+  string description = 2;
+  string status = 3;
+  int32 code = 4;
+  string created_at = 5;
+  int64 created_by = 6;
+  string updated_at = 7;
+  int64 updated_by = 8;
+  string language_code = 9;
+  string country_code = 10;
+  int64 company_id = 11;
+}
